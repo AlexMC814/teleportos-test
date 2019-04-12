@@ -1,25 +1,62 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Input from './components/Input/Input';
+import arrow from './components/Input/arrow-down';
 
 class App extends Component {
+  state = {
+    element: '',
+    keyStrikes: 0,
+  };
+
+  onKeyStrike = () => {
+    this.setState(prevState => prevState.keyStrikes++);
+  };
+
+  getEventSource = id => {
+    this.setState({ elementId: id });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='app'>
+        <div className='block'>
+          <Input
+            inputClasses='small'
+            inputType='text'
+            inputIcon={arrow}
+            onKeyStrike={this.onKeyStrike}
+          />
+          <Input
+            inputClasses=''
+            inputType='text'
+            inputIcon={arrow}
+            onKeyStrike={this.onKeyStrike}
+          />
+          <Input
+            inputClasses='large'
+            inputType='text'
+            inputIcon={arrow}
+            onKeyStrike={this.onKeyStrike}
+          />
+          <Input
+            inputClasses='error'
+            inputType='text'
+            inputIcon={arrow}
+            onKeyStrike={this.onKeyStrike}
+          />
+          <Input
+            inputClasses='disabled'
+            inputType='text'
+            inputIcon={arrow}
+            onKeyStrike={this.onKeyStrike}
+          />
+        </div>
+        <div className='block'>
+          <div className='events-info'>
+            <p className='info'>ID: {this.state.element}</p>
+            <p className='info'>Нажато: {this.state.keyStrikes} раз</p>
+          </div>
+        </div>
       </div>
     );
   }
